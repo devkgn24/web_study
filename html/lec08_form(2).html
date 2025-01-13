@@ -16,6 +16,40 @@
     min="2025-01-01" max="2025-01-13">
     <input type="month" min="2025-10">
     <input type="time" value="16:10">
+    <br>
+    <!-- checkbox : name이 같은 여러개 값 선택 -->
+    <input type="checkbox" value="1" id="jja"
+    name="lunch">
+    <label for="jja">짜장면</label>
+    <input type="checkbox" value="2" id="bok"
+    name="lunch">
+    <label for="bok">볶음밥</label><br>
+    <!-- radio : name이 같은 것중에 하나만 -->
+    <input type="radio" value="1"
+    id="seoul" name="addr">
+    <label for="seoul">서울</label>
+    <input type="radio" value="2"
+    id="dae" name="addr">
+    <label for="dae">대전</label>
+    <br>
+    <select name="user_select" id="user_select">
+        <option value="">선택하기</option>
+        <option value="1">다이제</option>
+        <option value="2">콘치</option>
+    </select>
+    <br>
+    <progress max="100" value="7"></progress>
+    <br>
+    <form method="get" name="testFrm" action="#">
+        <input type="text" required>
+        <button type="button" 
+        onclick="alert('안녕');">버튼</button>
+        <button type="submit">제출</button>
+        <button type="reset">테스트</button>
+        <input type="button" value="input타입">
+        <button>확인</button>
+    </form>
+
     <br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br>
 </body>
