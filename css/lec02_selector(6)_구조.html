@@ -44,5 +44,28 @@
             </tr>
         </tbody>
     </table>
+    <style>
+        ul > li:first-child{background-color:crimson;}
+        ul > li:nth-child(2){
+            background-color: black;
+            color: white;
+        }
+        ul > li:nth-child(3) > ol > li:nth-child(3){
+            background-color: green;
+        }
+    </style>
+    <ul>
+        <li>한식</li>
+        <li>중식</li>
+        <li>
+            양식
+            <ol>
+                <li>스파게티</li>
+                <li>리조또</li>
+                <li>샐러드</li>
+            </ol>
+        </li>
+        <li>일식</li>
+    </ul>
 </body>
 </html>
