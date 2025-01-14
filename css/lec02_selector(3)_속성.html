@@ -23,5 +23,27 @@
         <input type="password" id="user_pw">
     </form>
     <a href="#">위로 가기</a>
+    <h2>속성 태그 연습</h2>
+    <style>
+        input[type="email"]{
+            background-color: skyblue;
+        }
+        input[type="password"]{
+            background-color: crimson;
+        }
+    </style>
+    <form>
+        <fieldset>
+            <legend>사용자 정보</legend>
+            <label for="user_email">이메일</label>
+            <input type="email" id="user_email"><br>
+            <label for="user_pw">비밀번호</label>
+            <input type="password" id="user_pw"><br>
+            <label for="user_level">사용자 등급</label>
+            <input type="number" id="user_level"><br>
+            <label for="user_info">사용자 정보</label>
+            <input type="text" id="user_info">
+        </fieldset>
+    </form>
 </body>
 </html>
