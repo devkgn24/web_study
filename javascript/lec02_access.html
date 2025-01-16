@@ -133,6 +133,57 @@
             ele2.style.backgroundColor = 'gold';
         }
     </script>
+    <h1>색상 선택 후<br>
+        변경 버튼을 클릭하면<br>
+        색상이 변경되도록<br>
+    </h1>
+    <input type="color" id="colorPalette">
+    <input type="button" id="colorBtn" 
+    value="변경">
+    <style>
+        .container{
+            width: 100px; height: 100px;
+            background-color: black;
+        }
+    </style>
+    <br>
+    <div class="container">
+
+    </div>
+    <script>
+        document.getElementById('colorBtn').onclick= function(){
+            // console.log('테스트');
+            var color1 = document.getElementById('colorPalette').value;
+            document.getElementsByClassName('container')[0].style.backgroundColor = color1;
+        }
+    </script>
+    <h2>innerHTML</h2>
+    <div id="test1">
+        <p>Hello!</p>
+    </div>
+    <div id="test2">안녕하세요~</div>
+    <input type="button" value="가져오기" 
+    onclick="getTag();">
+
+    <input type="button" value="바꿔주기" onclick="setTag();">
+    <script>
+        function setTag(){
+            document.getElementById('test1').innerHTML = '<h1>Ohhhhhh</h1>';
+            document.getElementById('test1').innerHTML += '<h1>Ohhhhhh</h1>';
+            document.getElementById('test1').innerHTML += 'Lorem dolor sit amet';
+        }
+        function getTag(){
+            var t1 = document.getElementById('test1').innerHTML;
+            var t2 = document.getElementById('test2').innerHTML;
+            console.log(t1);
+            console.log(t2);
+        }
+    </script>
+
+
+
+
+
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
