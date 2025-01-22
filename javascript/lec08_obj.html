@@ -149,6 +149,7 @@
             }
         }
         let setPerson = function(name,bool,arr,item){
+
             let obj = {
                 name : name,
                 isStudent : bool,
@@ -165,14 +166,68 @@
             };
             return obj; 
         }
-
-
     </script>
 
+    <button onclick="thisFunc();">this Test</button>
 
-
-
-
+    <script>
+        const thisFunc = function(){
+            account('철수').printName();
+        }
+        const account = function(name){
+            return {name : name,
+                    printName : ()=>{
+                        console.log(this);
+                    }
+                }
+        }
+    </script>
+    <button onclick="showThis(this);">화살표 this</button>
+    <script>
+        let showThis = (element) =>{
+            console.log(element);
+        }
+    </script>
+    <h2>🥐빵 좋아해요...?🥖</h2>
+    <fieldset>
+        <legend>출력</legend>
+        <label for="product_name">메뉴명 : </label>
+        <input type="text" id="product_name"><br>
+        <label for="product_price">가격 :</label>
+        <input type="text" id="product_price">
+    </fieldset><br>
+    <button onclick="insertBread();">입력</button>
+    <button onclick="printBread();">출력</button>
+    <script>
+        let bread = new Object();
+        let insertBread = function(){
+            // 프롬프트로 메뉴명
+            // 프롬프트로 가격
+            // bread 객체 생성, 객체에 속성 추가
+        }
+        let printBread = function(){
+            // 객체에 들어있는 정보를 input에 출력 -> value
+        }
+    </script>
+    <h1>객체 배열</h1>
+    <script>
+        let customers = [
+            {
+                name:'영희',
+                age : 24
+            }
+        ];
+        console.log(customers[0]['name']);
+        console.log(customers[0].name);
+        
+        customers.push({name:'철수',gender:'M'});
+        customers.unshift({name:'길동',age:51});
+        
+        customers.pop();
+        customers.shift();
+        
+        console.log(customers);
+    </script>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>

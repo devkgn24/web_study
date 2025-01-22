@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내장객체</title>
+</head>
+<body>
+    <select id="fruit">
+        <option value="">선택하기</option>
+        <option value="apple">사과</option>
+        <option value=" banana ">바나나</option>
+        <option value="PEACH">복숭아</option>
+    </select>
+    <button onclick="changeFruit();">과일</button>
+    <script>
+        let changeFruit = function(){
+            let val = document.getElementById('fruit').value;
+                val = val.toUpperCase();
+                // val = val.toLowerCase();
+                val = val.trim();
+            switch(val){
+                case 'APPLE' :alert('사과사세요~');break;
+                case 'BANANA' : alert('바나나입니다!');break;
+                case 'PEACH' : alert('복숭아 신상');break;
+            }
+        }
+    </script>
+    <h1>댓글 입력창</h1>
+    <textarea id="comment" maxlength="100" onkeyup="getLength(this);"></textarea>
+    <span id="count">0</span>
+    <span>/100</span>
+    <script>
+        let getLength = function(element){
+            // console.log(element.value);
+            document.getElementById('count').innerText = element.value.length;
+
+            for(let i = 0 ; i < element.value.length ; i++){
+                if(element.value.charAt(i) == 'a'){
+                    alert('10초동안 문자를 쓸 수 없습니다.');
+                }
+            }
+
+        }
+    </script>
+    <br>
+    <input type="text" id="address" style="width:700px;"
+    value="서울 금천구 가산디지털2로 95 3층 구디아카데미 B반">
+    <button onclick="findGu();">금천구찾기!!</button>
+    <script>
+        let findGu = function(){
+            let addr = document.getElementById('address').value;
+            let idx1 = addr.indexOf('구');  // 5
+            let idx2 = addr.lastIndexOf('구');  // 21
+            console.log(idx1,idx2);
+
+            let result = addr.substr(addr.indexOf('금'),3);
+            console.log(result);
+        }
+    </script>
+    <input type="text" value="HTML,CSS,Java" id="lang">
+    <button onclick="testReplace();">변경</button>
+    <script>
+        let testReplace = function(){
+            let temp = document.getElementById('lang').value;
+            if(temp.includes('Java')){
+                temp = temp.replace('Java','JavaScript');
+            }
+            console.log(temp);
+        }
+    </script>
+</body>
+</html>
