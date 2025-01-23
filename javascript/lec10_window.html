@@ -139,7 +139,11 @@
         const createImg = function(){
             // document.getElementById('tag_div').innerHTML 
             //     += '<img src="../resources/dung.png">';
-
+            const imgTag = document.createElement('img');
+            imgTag.setAttribute('src','../resources/dung.png');
+            imgTag.setAttribute('alt','뚱이가 인사합니다');
+            imgTag.setAttribute('width','200');
+            document.getElementById('tag_div').appendChild(imgTag);
         }
         const addTextElement = function(){
             // document.getElementById('tag_div').innerHTML +='<p>Hello</p>';
@@ -149,7 +153,73 @@
             document.getElementById('tag_div').appendChild(pTag);
         }
     </script>
+    <h3>기준</h3>
+    <ul id="sample_ul">
+        <li>수박</li>
+        <li>딸기</li>
+        <li>레몬</li>
+    </ul>
+    <h3>실제</h3>
+    <button onclick="makeList();">목록 생성</button>
+    <div id="ul_div"></div>
+    <script>
+        const makeList = function(){
+            const arr = ['수박','딸기','레몬'];
+            const ul = document.createElement('ul');
+            for(let i = 0 ; i < arr.length ; i++){
+                const li = document.createElement('li');
+                const text = document.createTextNode(arr[i]);
+                li.appendChild(text);
+                ul.appendChild(li);
+            }
+            document.getElementById('ul_div').appendChild(ul);
 
+            // const li1 = document.createElement('li');
+            // const text1 = document.createTextNode('수박');
+            // li1.appendChild(text1);
+            // const li2 = document.createElement('li');
+            // const text2 = document.createTextNode('딸기');
+            // li2.appendChild(text2);
+            // const li3 = document.createElement('li');
+            // const text3 = document.createTextNode('레몬');
+            // li3.appendChild(text3);
+            // const ul = document.createElement('ul');
+            // ul.appendChild(li1);
+            // ul.appendChild(li2);
+            // ul.appendChild(li3);
+        }
+    </script>
+    <h1>insertAdjacentElement</h1>
+    <style>
+        #insert_div{border: 1px solid crimson;}
+        #origin{background-color: aquamarine;}
+    </style>
+    <button onclick="insertTest();">원하는 위치에 추가</button>
+    <button onclick="changeInsert();">위치 변경</button>
+    <div id="insert_div">
+        <h1 id="origin">판단용 h1</h1>
+    </div>
+    <script>
+        const changeInsert = function(){
+            const sample = document.getElementById('sample_ul');
+            const insertDiv = document.getElementById('insert_div');
+            insertDiv.insertAdjacentElement('beforeend',sample);
+        }
+        const insertTest = function(){
+            const h3 = document.createElement('h3');
+            const h3Text = document.createTextNode('지정태그앞(형제)');
+            h3.appendChild(h3Text);
+
+            const h2 = document.createElement('h2');
+            const h2Text = document.createTextNode('지정태그뒤~~~~');
+            h2.appendChild(h2Text);
+
+            const div = document.getElementById('insert_div');
+            div.insertAdjacentElement('beforebegin',h3);
+            // div.insertAdjacentElement('afterbegin',h3);
+            div.insertAdjacentElement('afterend',h2);
+        }
+    </script>
 
 
 
