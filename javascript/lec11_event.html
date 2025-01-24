@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+</head>
+<body>
+    <h1>이벤트 설정 방식</h1>
+    <h2>1. 인라인 방식</h2>
+    <button onclick="inlineTest(this);">this테스트</button>
+    <button onclick="inlineFunc(event);">event 테스트</button>
+    <script>
+        // 인라인에서 this사용 
+        // - 함수 호출문에 매개변수로 반드시 this라고 적고
+        // - 함수 선언부 매개변수명은 원하는것 적기
+        const inlineTest = function(ele){
+            console.log(ele);
+        }
+        // 인라인에서 event사용
+        // - 함수 호출문 : event
+        // - 함수 선언부 : 원하는 명칭
+        const inlineFunc = function(e){
+            console.log(e.target);
+            console.log(this);  // window!!
+        }
+    </script>
+    <h2>2. 고전 방식</h2>
+    <p id="oldTag">고전 방식 테스트</p>
+    <script>
+        // 고전 방식에서 this -> 선언부 사용 불가능
+        //                   -> 함수 내부 호출 가능
+        // 익명함수의 매개변수는 어떤 변수명이든 무조건 event객체
+        document.getElementById('oldTag').onclick = function(e){
+            console.log(this);
+            console.log(e.target);
+        }
+        // 고전 방식 -> 여러 이벤트 핸들러 있으면 마지막만 동작
+        // document.getElementById('oldTag').onclick = function(){
+        //     console.log('메롱~');
+        // }
+    </script>
+    <h2>3. 표준 방식</h2>
+    <p id="standTag">표준 방식 테스트</p>
+    <script>
+        // 익명함수의 매개변수가 어떤 변수명이든 무조건 event객체
+        document.getElementById('standTag').addEventListener('click',function(e){
+            console.log(e.target);
+            console.log(this);
+        });
+        // 표준 방식 : 여러 이벤트 핸들러가 있을때 모든 핸들러 동작
+        document.getElementById('standTag').addEventListener('click',function(e){
+            console.log('이게 되나?');
+        });
+    </script>
+    <h1>마우스 이벤트</h1>
+    <style>
+        #mouse_test{
+            border: green 1px solid;
+            width: 200px; height: 200px;
+        }    
+    </style>
+    <div id="mouse_test">
+        타겟
+    </div>
+    <script>
+        document.getElementById('mouse_test').addEventListener('dblclick',function(){
+            this.style.backgroundColor = 'gold';
+        });
+        document.getElementById('mouse_test').addEventListener('mouseenter',function(e){
+            // e.target.innerHTML += '들어갔다!!';
+            const txt = document.createTextNode('들어갔다!!');
+            e.target.appendChild(txt);
+        });
+        document.getElementById('mouse_test').addEventListener('mouseleave',function(){
+            this.innerHTML += '나가는중~';
+        });
+    </script>
+    <h1>키 이벤트</h1>
+    <textarea id="keyTag"></textarea>
+    <script>
+        // 모든 키 -> Backspace, ESC
+        document.getElementById('keyTag').addEventListener('keydown',function(e){
+            console.log(e.key);
+            console.log(e.code);
+            if(e.code == 'KeyS'){
+                let img = document.createElement('img');
+                    img.setAttribute('src','../resources/sponge.png');
+                    img.setAttribute('width','50');
+                e.target.insertAdjacentElement('afterend',img);    
+            }
+        });
+        // 입력 가능한키
+        document.getElementById('keyTag').addEventListener('keypress',function(e){
+            if(e.code == 'KeyD'){
+                let img = document.createElement('img');
+                    img.setAttribute('src','../resources/dung.png');
+                    img.setAttribute('width','50');
+                e.target.insertAdjacentElement('beforebegin',img);    
+            }
+        });
+        document.getElementById('keyTag').addEventListener('keyup',function(e){
+            if(event.key == 'CapsLock'){
+                alert('대문자 쓰면 로그인 안될껄요?');
+            }
+        });
+    </script>
+    <label for="searchText">검색어</label>
+    <input type="text" id="searchText">
+    <input type="button" value="검색" onclick="searchPerson();">
+    <script>
+        let persons = [
+            {name:'김철수',age:17},
+            {name:'이영희',age:23},
+            {name:'홍길동',age:35}
+        ];
+        let searchPerson = function(){
+            let searchText = document.getElementById('searchText').value;
+            let resultText = '존재하지 않는 회원입니다.';
+            for(let i = 0 ; i < persons.length ; i++){
+                if(persons[i]['name'] == searchText){
+                    resultText = `${persons[i].name}님은 ${persons[i].age}살 입니다.`;
+                    break;
+                }
+            }
+            alert(resultText);
+        }
+    </script>
+    <h1>form 이벤트</h1>
+    <form>
+        <input type="text" id="input1">
+        <input type="password" id="input2">
+    </form>
+    <script>
+        document.querySelector('#input1').addEventListener('focus',function(e){
+            e.target.style.backgroundColor = 'gold';
+        });
+        document.querySelector('#input1').addEventListener('blur',function(e){
+            e.target.style.backgroundColor = 'white';
+        });
+    </script>
+    <h1>버블링 : 자식 -> 부모님 -> 조상님</h1>
+    <style>
+        #ancestor{border: 2px solid orange;}
+        #parent{border : 4px dotted cadetblue;}
+        #child{border:4px double crimson}
+    </style>
+    <form id="ancestor">
+        조상님
+        <div id="parent">
+            부모님
+            <p id="child">자식</p>
+        </div>
+    </form>
+    <script>
+        document.getElementById('child').addEventListener('click',function(e){
+            e.stopPropagation();
+            alert('자식');
+        });
+        document.getElementById('parent').addEventListener('click',function(e){
+            e.stopPropagation();
+            alert('부모님');
+        });
+        document.getElementById('ancestor').addEventListener('click',function(e){
+            e.stopPropagation();
+            alert('조상님');
+        });
+    </script>
+    <a id="noClick" href="https://www.naver.com">테스트</a>
+    <script>
+        document.getElementById('noClick').addEventListener('click',function(e){
+            e.preventDefault();
+            alert('네이버로 안 가쟈~');
+        })
+    </script>
+    <form id="testFrm">
+        <input type="text" name="user_data">
+        <input type="submit" value="제출">
+    </form>
+    <script>
+        document.getElementById('testFrm').onsubmit = function(){
+            const val = document.querySelector('input[name=user_data]').value;
+            if(val.length < 4){
+                alert('데이터는 4글자 이상이어야 해요.');
+                return false;
+            } else{
+                return true;
+            }
+        }
+    </script>
+
+<h3>유효성 검사</h3>
+<style>
+    .pw_vali{display: none;}
+    .pw_vali.pass{display:inline;color: green;}
+    .pw_vali.fail{display: inline;color: red;}
+</style>   
+<form id="joinForm">
+    <input type="password" placeholder="비밀번호" name="user_pw"><br>
+    <input type="password" placeholder="비밀번호 확인" name="user_pw_check"><br>
+    <span class="pw_vali"></span>
+</form>
+<script>
+    // 1. blur이벤트 사용(비밀번호 확인)
+    // 2. event.target.value를 통해서 비밀번호와 비밀번호 확인 값 가져오기
+    // 3. 비밀번호와 비밀번호 확인 일치확인
+    // 4. 일치 -> pass 클래스 추가, X -> fail 클래스 추가 
+    // (절대 html 코드 수정하지 마세요. id, class 추가 불가능)
+    document.getElementsByName('user_pw_check')[0].addEventListener('blur',function(event){
+        const pwCheck = event.target.value;
+        const pw = event.target.previousElementSibling.previousElementSibling.value;
+        const pwVali = event.target.nextElementSibling.nextElementSibling;
+        if(pw === pwCheck){
+            pwVali.innerText = '비밀번호가 일치합니다.';
+            pwVali.classList.add('pass');
+            pwVali.classList.remove('fail');
+        } else{
+            pwVali.innerText = '비밀번호가 일치하지 않습니다.';
+            pwVali.classList.add('fail');
+            pwVali.classList.remove('pass');
+        }
+    });
+</script>
+<span id="testSpan">test</span>
+<script>
+    document.getElementById('testSpan').onclick = function(){
+        document.getElementById('testSpan').innerHTML = 'xptmxm';
+    }
+</script>
+
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+</body>
+</html>
