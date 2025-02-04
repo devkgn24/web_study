@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소 생성</title>
+    <script src="../resources/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <h1>html() 함수</h1>
+    <div id="myDiv">
+        <a href="#">구디</a>
+    </div>
+    <button id="getHtml">HTML 가져오기</button>
+    <button id="setHtml">HTML 변경하기</button>
+    <script>
+        $(function(){
+            $('#getHtml').on('click',function(){
+                let text = $('#myDiv').html();
+                console.log(text);
+                console.log($('#myDiv').html());
+
+                console.log($('#myDiv').text());
+            });
+            $('#setHtml').click(function(){
+                // $('#myDiv').html('<p>새로운 내용</p>');
+                $('#myDiv').text('새로운 텍스트~');
+            });
+        })
+    </script>
+    <h2>자식 요소 추가</h2>
+    <div id="container" style="border:2px solid green;">
+        <p>기존 자식 요소</p>
+    </div>
+    <button id="addLast">맨 뒤에 추가</button>
+    <button id="addFirst">맨 앞에 추가</button>
+    <button id="addBefore">앞에 추가</button>
+    <button id="addAfter">뒤에 추가</button>
+    <script>
+        $(function(){
+            $('#addLast').click(function(){
+                $('#container').append('<p>👉맨 뒤에 추가됨</p>');
+            });
+            $('#addFirst').click(function(){
+                $('#container').prepend('<p>👈맨 앞에 추가됨</p>');
+            });
+            $('#addBefore').click(function(){
+                $('#container').before('<p>⬆️</p>');
+            });
+            $('#addAfter').click(function(){
+                $('#container').after('<p>⬇️</p>');
+            })
+        })
+    </script>
+</body>
+</html>
